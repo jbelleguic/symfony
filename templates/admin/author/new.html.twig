@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajout d'auteur{% endblock %}
+{% set action = app.current_route == 'app_admin_author_new' ? 'Ajout' : 'Édition' %}
+
+{% block title %}{{ action }} d'auteur{% endblock %}
 
 {% block body %}
 <style>
@@ -8,7 +10,7 @@
 </style>
 
 <div class="w-50 m-auto py-5 my-5">
-    <h1>Ajout d'auteur</h1>
+    <h1>{{ action }} d'auteur</h1>
 
     {{ form_start(form) }}
     {{ form_row(form.name) }}

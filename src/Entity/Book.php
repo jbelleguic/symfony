@@ -29,6 +29,7 @@ class Book
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
+    #[Assert\Url()]
     private ?string $cover = null;
 
     #[ORM\Column]
