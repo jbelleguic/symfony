@@ -12,6 +12,15 @@ use App\Form\BookType;
 #[Route('/admin/book')]
 class BookController extends AbstractController
 {
+    #[Route('', name: 'app_admin_book_index', methods: ['GET'])]
+    public function index(): Response
+    {
+
+        return $this->render('admin/book/index.html.twig', [
+            'controller_name' => 'BookController',
+        ]);
+    }
+
     #[Route('/new', name: 'app_admin_book_new')]
     public function new(Request $request): Response
     {
@@ -20,7 +29,10 @@ class BookController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($author);
+            $manager->flush();
 
+            return $this->redirectToRoute('app_admin_book_index');
         }
 
         return $this->render('admin/book/new.html.twig', [

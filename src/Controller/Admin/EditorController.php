@@ -12,6 +12,15 @@ use App\Form\EditorType;
 #[Route('/admin/editor')]
 class EditorController extends AbstractController
 {
+    #[Route('', name: 'app_admin_editor_index', methods: ['GET'])]
+    public function index(): Response
+    {
+
+        return $this->render('admin/editor/index.html.twig', [
+            'controller_name' => 'EditorController',
+        ]);
+    }
+
     #[Route('/new', name: 'app_admin_editor_new')]
     public function new(Request $request): Response
     {
@@ -20,7 +29,10 @@ class EditorController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($author);
+            $manager->flush();
 
+            return $this->redirectToRoute('app_admin_editor_index');
         }
 
         return $this->render('admin/editor/new.html.twig', [

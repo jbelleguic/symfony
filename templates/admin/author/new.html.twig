@@ -11,7 +11,11 @@
     <h1>Ajout d'auteur</h1>
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.dateOfBirth) }}
+    {{ form_row(form.dateOfDeath) }}
+    {{ form_row(form.nationality) }}
+    {{ form_row(form.books) }}
     <button type="submit" class="btn btn-primary">Envoyer</button>
     {{ form_end(form) }}
     
