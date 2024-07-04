@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Author;
 use App\Form\AuthorType;
@@ -22,6 +23,20 @@ class AuthorController extends AbstractController
         ]);
     }
 
+    // #[Route('/validate', name: 'app_admin_author_validate')]
+    // public function validate(ValidatorInterface $validator): Response
+    // {
+    //     $errors = $validator->validate($book);
+    //     if (0 < \count($errors)) 
+    //     {
+
+    //     }
+
+    //     return $this->render('admin/author/index.html.twig', [
+    //         'controller_name' => 'AuthorController',
+    //     ]);
+
+    // }
 
     #[Route('/new', name: 'app_admin_author_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager): Response

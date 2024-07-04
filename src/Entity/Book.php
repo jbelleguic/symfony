@@ -6,6 +6,8 @@ use App\Repository\BookRepository;
 use App\Enum\BookStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
@@ -17,34 +19,44 @@ class Book
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(13)]
     private ?string $isbn = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $cover = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?\DateTimeImmutable $editedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $plot = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?BookStatus $status = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank()]
     private ?int $pageNumber = null;
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank()]
     private ?Editor $editor = null;
 
     /**
      * @var Collection<int, Author>
      */
     #[ORM\ManyToMany(targetEntity: Author::class, mappedBy: 'books')]
+    #[Assert\NotBlank()]
     private Collection $authors;
 
     /**

@@ -9,7 +9,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class AuthorType extends AbstractType
 {
@@ -41,6 +43,10 @@ class AuthorType extends AbstractType
                 'multiple' => true,
                 'required' => false,
                 'label' => 'Choix du livre',
+            ])
+            ->add('certification', CheckboxType::class, [
+                'mapped' => false,
+                'label' => 'Blabla',
             ])
         ;
     }

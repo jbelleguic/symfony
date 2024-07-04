@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +23,14 @@ class BookController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_book_new')]
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($author);
+            $manager->persist($book);
             $manager->flush();
 
             return $this->redirectToRoute('app_admin_book_index');
