@@ -7,6 +7,7 @@ use App\Enum\BookStatus;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +30,6 @@ class Book
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
-    #[Assert\Url()]
     private ?string $cover = null;
 
     #[ORM\Column]
@@ -56,7 +56,7 @@ class Book
     /**
      * @var Collection<int, Author>
      */
-    #[ORM\ManyToMany(targetEntity: Author::class, mappedBy: 'books')]
+    #[ORM\ManyToMany(targetEntity: Author::class, mappedBy: 'books', cascade: ['persist'])]
     #[Assert\NotBlank()]
     private Collection $authors;
 
